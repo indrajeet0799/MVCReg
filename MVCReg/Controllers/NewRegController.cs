@@ -18,10 +18,10 @@ namespace MVCReg.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(UserClass uc,HttpPostedFileBase file)
+        public ActionResult Index(UserClass uc, HttpPostedFileBase file)
         {
             string mainconn = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
-            SqlConnection sqlconn=new SqlConnection(mainconn);
+            SqlConnection sqlconn = new SqlConnection(mainconn);
             string sqlquery = "insert into [dbo].[MVCReg] (Uname,Uemail,UPwd,Gender,Uimg) values (@Uname,@Uemail,@UPwd,@Gender,@Uimg)";
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             sqlconn.Open();
@@ -29,10 +29,10 @@ namespace MVCReg.Controllers
             sqlcomm.Parameters.AddWithValue("@Uemail", uc.Uemail);
             sqlcomm.Parameters.AddWithValue("@UPwd", uc.UPwd);
             sqlcomm.Parameters.AddWithValue("@Gender", uc.Gender);
-           // sqlcomm.Parameters.AddWithValue("@Uimg", uc.Uimg);
-           if (file != null && file.ContentLength>0)
+            // sqlcomm.Parameters.AddWithValue("@Uimg", uc.Uimg);
+            if (file != null && file.ContentLength > 0)
             {
-                string filename=Path.GetFileName(file.FileName);
+                string filename = Path.GetFileName(file.FileName);
                 string imgpath = Path.Combine(Server.MapPath("~/User-Images/"), filename);
                 file.SaveAs(imgpath);
             }
@@ -40,7 +40,7 @@ namespace MVCReg.Controllers
             sqlcomm.ExecuteNonQuery();
             sqlconn.Close();
             ViewData["Message"] = "User Record" + uc.Uname + "Is Saved Successfull";
-             return View();
+            return View();
         }
     }
 }
