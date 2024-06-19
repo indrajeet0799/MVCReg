@@ -9,7 +9,7 @@ namespace MVCReg.Models
 {
     public class UserClass
     {
-        [Required(ErrorMessage ="Enter username")]
+        //[Required(ErrorMessage ="Enter username")]
         [Display(Name ="Enter UserName")]
         [StringLength(maximumLength:7,MinimumLength =3,ErrorMessage ="Username lenth must be 7 & min3")]
         public string Uname { get; set; }
